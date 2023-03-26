@@ -1,1 +1,4 @@
 LeNet/data/
+AlexNet/AlexNet.pth
+datasets/
+*.pyc
