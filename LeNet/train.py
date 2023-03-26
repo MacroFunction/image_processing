@@ -1,7 +1,7 @@
 import torch
 import torchvision
 import torch.nn as nn
-from LeNet import LeNet
+from model import LeNet
 import torch.optim as optim
 import torchvision.transforms as transforms
 
@@ -14,34 +14,35 @@ def main():
     # 50000张训练图片
     # 第一次使用时要将download设置为True才会自动去下载数据集
     train_set = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                             download=True, transform=transform)
+                                             download=False, transform=transform)
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=36,
-                                               shuffle=True, num_workers=0)
+                                               shuffle=False, num_workers=6)
 
     # 10000张验证图片
     # 第一次使用时要将download设置为True才会自动去下载数据集
     val_set = torchvision.datasets.CIFAR10(root='./data', train=False,
                                            download=True, transform=transform)
     val_loader = torch.utils.data.DataLoader(val_set, batch_size=5000,
-                                             shuffle=False, num_workers=0)
+                                             shuffle=False, num_workers=6)
     val_data_iter = iter(val_loader)
-    val_image, val_label = val_data_iter.next()
+    val_image, val_label = val_data_iter.next()  #获取一批数据
 
     # classes = ('plane', 'car', 'bird', 'cat',
     #            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-
+    #创建算法模型的实例
     net = LeNet()
+    #定义损失函数
     loss_function = nn.CrossEntropyLoss()
+    #定义优化器
     optimizer = optim.Adam(net.parameters(), lr=0.001)
-
+    #开始训练
     for epoch in range(5):  # loop over the dataset multiple times
-
         running_loss = 0.0
         for step, data in enumerate(train_loader, start=0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
 
-            # zero the parameter gradients
+            # 将历史损失梯度置零
             optimizer.zero_grad()
             # forward + backward + optimize
             outputs = net(inputs)
@@ -62,7 +63,7 @@ def main():
                     running_loss = 0.0
 
     print('Finished Training')
-
+    #保存训练的模型
     save_path = './Lenet.pth'
     torch.save(net.state_dict(), save_path)
 
