@@ -1,4 +1,4 @@
-classification/LeNet/data/
-classification/AlexNet/AlexNet.pth
+classification_torch/LeNet/data/
+classification_torch/AlexNet/AlexNet.pth
 datasets/
 *.pyc
