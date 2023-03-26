@@ -19,7 +19,7 @@ def main():
     lr = 0.0002
     nw = 6
 
-    save_path = './AlexNet.pth'
+    save_path = 'AlexNet.pth'
 
     #训练使用的设备
     device = torch.device("cuda:0")
@@ -36,7 +36,7 @@ def main():
                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])}
 
     # 数据集的路径
-    data_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    data_root = os.path.abspath(os.path.join(os.getcwd(), "../.."))
     image_path = os.path.join(data_root, "datasets", "flower_data")
 
     assert os.path.exists(image_path), "{} path does not exist.".format(image_path)

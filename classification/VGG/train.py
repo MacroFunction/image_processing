@@ -16,7 +16,7 @@ def main():
     epochs = 10
     lr = 0.0002
     nw = 6
-    save_path = './VGGNet.pth'
+    save_path = 'VGGNet.pth'
 
     device = torch.device("cuda:0")
 
@@ -29,7 +29,7 @@ def main():
                                    transforms.ToTensor(),
                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])}
 
-    data_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    data_root = os.path.abspath(os.path.join(os.getcwd(), "../.."))
     image_path = os.path.join(data_root, "datasets", "flower_data")
 
     assert os.path.exists(image_path), "{} path does not exist.".format(image_path)

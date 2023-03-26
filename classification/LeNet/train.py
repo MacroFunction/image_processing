@@ -64,7 +64,7 @@ def main():
 
     print('Finished Training')
     #保存训练的模型
-    save_path = './Lenet.pth'
+    save_path = 'Lenet.pth'
     torch.save(net.state_dict(), save_path)
 
 
