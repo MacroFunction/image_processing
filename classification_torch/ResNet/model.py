@@ -21,8 +21,10 @@ class BasicBlock(nn.Module):
         if self.downsample is not None:
             identity = self.downsample(x)
         out = self.conv1(x)
-        out = self.bn1(x)
-        out = self.bn2(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+        out = self.conv2(out)
+        out = self.bn2(out)
 
         out += identity
         out = self.relu(out)
@@ -146,6 +148,14 @@ class ResNet(nn.Module):
 
 def resnet34(num_classes=1000, include_top=True):
     return ResNet(BasicBlock, [3, 4, 6, 3], num_classes=num_classes, include_top=include_top)
+
+
+def resnet50(num_classes=1000, include_top=True):
+    return ResNet(Bottleneck, [3, 4, 6, 3], num_classes=num_classes, include_top=include_top)
+
+
+def resnet101(num_classes=1000, include_top=True):
+    return ResNet(Bottleneck, [3, 4, 23, 3], num_classes=num_classes, include_top=include_top)
 
 
 if __name__ == '__main__':
