@@ -2,3 +2,4 @@ classification_torch/LeNet/data/
 classification_torch/AlexNet/AlexNet.pth
 datasets/
 *.pyc
+*.pth
